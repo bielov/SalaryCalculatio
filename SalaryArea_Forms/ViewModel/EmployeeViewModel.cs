@@ -246,7 +246,6 @@ namespace SalaryArea_Forms.ViewModel
            
             TheEmployee.PositionID = ThePosition.PositionId;
             TheEmployee.EmployeeID = ThePerson.PersonID;
-         // TheEmployee.position.PositionName
             _emplog.Add(TheEmployee);
             RefreshEmployeeCollection();
             ClearProperties();
