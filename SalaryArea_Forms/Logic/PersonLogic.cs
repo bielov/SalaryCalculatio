@@ -11,16 +11,13 @@ namespace SalaryArea_Forms.Logic
     {
         SalDbContext _dbContext = null;
 
-        //public IEnumerable<Person> PersonList { get; private set; }
-
         public PersonLogic()
         {
             _dbContext = new SalDbContext();
         }
         internal IEnumerable<Person> Get()
         {
-            return _dbContext.Persons.ToList(); 
-          
+            return _dbContext.Persons.ToList();          
 
         }
         internal void Delete(Person person)
@@ -120,10 +117,10 @@ namespace SalaryArea_Forms.Logic
             }
             else
             {
-                if ((string.IsNullOrWhiteSpace(person.IndentificalCode.ToString())))
+                if ((string.IsNullOrWhiteSpace(person.IndentificalCode.ToString())) &&
+                    (!Regex.IsMatch(person.IndentificalCode, @"\A[0-9]{10}\z")))
                 {
-                    //  ||
-                    //(!Regex.IsMatch(person.IndentificalCode, @"\A[0-9]{10}\z"))
+                   
                     MessageError += "Індефікаційний код має бути 10 символьним";
                 }
 
@@ -144,11 +141,9 @@ namespace SalaryArea_Forms.Logic
                 {
                     MessageError += "MidleName,";
                 }
-                if ((string.IsNullOrWhiteSpace(person.PasportCode)))
-                   // ||
-                   //(!Regex.IsMatch(person.PasportCode.ToString(), @"\A[0-9]{10}\z"))))
+                if ((string.IsNullOrWhiteSpace(person.PasportCode)))                  
                 {
-                    MessageError += "Паспортний код має бути 10 символьним";
+                    MessageError += "Паспортний код має бути 6 символьним";
                 }
             }
             if (string.IsNullOrEmpty(MessageError))
