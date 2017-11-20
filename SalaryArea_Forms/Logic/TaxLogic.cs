@@ -25,7 +25,6 @@ namespace SalaryArea_Forms.Logic
         }
         internal void Addt(Tax tax)
         {
-           // MessageBox.Show("Add tax", "Помилка");
             if (CheckValidation(tax) == true)
             {
                 try
@@ -63,8 +62,6 @@ namespace SalaryArea_Forms.Logic
                     MessageError = "Назва податку не може бути пустою";
                 }
                 if (string.IsNullOrWhiteSpace(tax.TaxPresentage.ToString()))
-                // ||
-                //(!Regex.IsMatch(tax.TaxPresentage.ToString(), @"\A[0-9]{5}\z")))   //Переробити регулярку 
                 {  MessageError = "Розмір податку має містити лише видимі цифрові символи";
                 }
             }
