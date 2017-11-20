@@ -17,9 +17,7 @@ namespace SalaryArea_Forms.Logic
         internal IEnumerable<Employee> Get()
         {
            return  _dbContext.Employees.Include("Person").Include("Position").ToList();
-        }
-
-        
+        }        
         internal IEnumerable<Person> GetPersonWithNull()
         {
             return _dbContext.Persons.Where(p=>p.employee== null).ToList();
@@ -32,7 +30,6 @@ namespace SalaryArea_Forms.Logic
                 {
                     _dbContext.Employees.Add(emp);
                     _dbContext.SaveChanges();
-
                 }
                 catch (Exception ex)
                 {
@@ -45,8 +42,7 @@ namespace SalaryArea_Forms.Logic
         internal  bool Excitatnce(Employee emp)
         {
             var employeeID = _dbContext.Employees
-               .FirstOrDefault(p => p.person == emp.person);
-            
+               .FirstOrDefault(p => p.person == emp.person);            
             if (employeeID != null)
             {
                 return false;
@@ -97,8 +93,7 @@ namespace SalaryArea_Forms.Logic
             }
             MessageBox.Show("Сутність успіщно оновлена");
         }
-       internal void Delete(Employee emp)
-        {
+       internal void Delete(Employee emp) {
             if (MessageBox.Show("Ви впевнені, що бажаєте виділити даного співробітника?",
               "Підтвердіть рішення.", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -108,7 +103,6 @@ namespace SalaryArea_Forms.Logic
                     {
                         _dbContext.Employees.Remove(emp);
                         _dbContext.SaveChanges();
-
                     }
                     catch (Exception ex)
                     {
