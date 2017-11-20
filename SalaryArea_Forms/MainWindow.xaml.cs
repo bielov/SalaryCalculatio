@@ -28,27 +28,5 @@ namespace SalaryArea_Forms
             InitializeComponent();
             DataContext = new MainWindowViewModel();
         }
-
-
-
-
-        //private void GeneralEmployeeShow_Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    GeneralEmployeeView gev = new GeneralEmployeeView();
-        //    gev.Show();
-
-        //}
-
-        //private void info_Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    GeneralInformationView geninf = new GeneralInformationView();
-        //    geninf.Show();
-        //}
-
-        //private void SalculatioButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    SalaryCalculationView salcal = new SalaryCalculationView();
-        //    salcal.Show();
-        //}
     }
 }
