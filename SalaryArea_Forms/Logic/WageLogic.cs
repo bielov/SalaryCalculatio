@@ -97,13 +97,7 @@ namespace SalaryArea_Forms.Logic
         }
         private bool CheckValidation(LivingWageMin wage)
         {
-            string MessageError = null;
-            //using (SalDBContext _db = new SalDBContext())
-            //{
-                //var checkedwage = _db.LivingWageMins.FirstOrDefault(p => p.WageYear == wage.WageYear);
-                //if(checkedwage!= null) { MessageError += "Елемент вже є в базі"; return false; }
-                //else
-                //{
+                    string MessageError = null;          
                     if(string.IsNullOrWhiteSpace(wage.WageYear.ToString()) &&
                        !Regex.IsMatch(wage.WageYear.ToString(), @"\A[0-9]{4}\z"))
                     {
