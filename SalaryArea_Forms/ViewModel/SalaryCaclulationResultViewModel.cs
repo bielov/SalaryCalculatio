@@ -259,10 +259,6 @@ namespace SalaryArea_Forms.ViewModel
                 SalaryCalculationCollection = new ObservableCollection<SalaryCalculation>(_salcalLogic.GetSalarybySalary(TheSalary));
                 ShowSalaryCollectionCollection = true;
             }
-            
-          //  ShowSalaryCollectionCollection = true;
-
-
             }
 
         private void SetEmployeeSearchProperties()
@@ -272,7 +268,6 @@ namespace SalaryArea_Forms.ViewModel
             SetSalrySearch = false;
             ShowSalaryCollectionCollection = false;
             SetEmployeeSearch = true;
-
         }
 
         private void SetDateSearchProperties()
@@ -285,13 +280,11 @@ namespace SalaryArea_Forms.ViewModel
         }
         private void SetSalarySearchProperties()
         {
-
             TextHeaderResult = "Перелік заробітніх плат за розміром зп";
             ShowSalaryCollectionCollection = false;
             SetEmployeeSearch = false;
             SetDateSearch = false;
             SetSalrySearch = true;
         }
-
     }
 }

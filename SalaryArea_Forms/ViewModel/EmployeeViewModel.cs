@@ -33,7 +33,6 @@ namespace SalaryArea_Forms.ViewModel
             PositionCollection = new ObservableCollection<Position>(_poclog.Get());
             PersonCollection = new ObservableCollection<Person>(_emplog.GetPersonWithNull());
             EmployeeCollection = new ObservableCollection<Employee>(_emplog.Get());
-            //
         }
         private ObservableCollection<Position> _positionCollection;
         public ObservableCollection<Position> PositionCollection
@@ -66,7 +65,6 @@ namespace SalaryArea_Forms.ViewModel
         {
             get
             {
-
                 return _employeeCollection;
             }
 
@@ -116,10 +114,7 @@ namespace SalaryArea_Forms.ViewModel
                 OnPropertyChanged("TheEmployee");
             }
         }
-
-
-        private bool _tableaddStackPanelVis;       
-
+        private bool _tableaddStackPanelVis;
         public bool TableaddStackPanelVis
         {
             get
@@ -246,7 +241,6 @@ namespace SalaryArea_Forms.ViewModel
            
             TheEmployee.PositionID = ThePosition.PositionId;
             TheEmployee.EmployeeID = ThePerson.PersonID;
-         // TheEmployee.position.PositionName
             _emplog.Add(TheEmployee);
             RefreshEmployeeCollection();
             ClearProperties();

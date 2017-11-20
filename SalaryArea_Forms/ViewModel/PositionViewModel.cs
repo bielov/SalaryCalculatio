@@ -9,12 +9,10 @@ namespace SalaryArea_Forms.ViewModel
     public class PositionViewModel : ViewModelBase
     {
         Position _pos;      
-     //   SalDBContext _db;
         PositionLogic _poclog;
            
         public PositionViewModel()
-        {           
-          // _db = new SalDBContext();                         
+        {                                   
             ThePosition = new Position();
            _poclog = new PositionLogic(); 
             PositionCollection = new ObservableCollection<Position>(_poclog.Get());
@@ -147,8 +145,6 @@ namespace SalaryArea_Forms.ViewModel
                 RefreshCollection();
             }
         }
-
-
         private void Update()
         {
             _poclog.Update(ThePosition);

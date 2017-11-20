@@ -18,7 +18,6 @@ namespace SalaryArea_Forms.Logic
         internal IEnumerable<Employee> GetEmployee()
         {
           return _dbContext.Employees.Where(p => p.EndDate == null);
-           // _dbContext.Employees.Include("Person").Include("Position");
         }
         internal IEnumerable<TimePeriod> GetPC()
         {
@@ -94,6 +93,6 @@ namespace SalaryArea_Forms.Logic
         private bool CheckValidation(SalaryCalculation salcal)
         {
             return true;
-        }
+        }      
     }
 }

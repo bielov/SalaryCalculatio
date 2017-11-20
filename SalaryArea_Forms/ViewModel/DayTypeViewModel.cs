@@ -10,10 +10,8 @@ namespace SalaryArea_Forms.ViewModel
     {
         DayType _theDayType;
         DayTypeLogic _dtlogic;
-        //SalDBContext _db = null;
         public DayTypeViewModel()
         {
-            //_db = new SalDBContext();
             _dtlogic = new DayTypeLogic();
             TheDayType = new DayType();
             DayTypeCollection = new ObservableCollection<DayType>(_dtlogic.Get());
@@ -32,11 +30,8 @@ namespace SalaryArea_Forms.ViewModel
                 OnPropertyChanged("DayTypeCollection");
             }
         }
-
-        //private bool _dtStackPanelVis;
+        
         private bool _updateDayTypeVis;
-
-
         public bool UpdateDayTypeVis
         {
             get
@@ -107,8 +102,6 @@ namespace SalaryArea_Forms.ViewModel
                 return new RelayCommand(SetAddingProperties, true);
             }
         }
-
-
         public RelayCommand SetUpdateTableButton
         {
             get
@@ -116,8 +109,6 @@ namespace SalaryArea_Forms.ViewModel
                 return new RelayCommand(SetUpdateProperties, true);
             }
         }
-
-
         public RelayCommand Cancel
         {
             get
@@ -139,15 +130,13 @@ namespace SalaryArea_Forms.ViewModel
                 OnPropertyChanged("TheDayType");
             }
         }
-
         private void ClearProperties()
         {
             TheDayType = null;
             DayTypeStackPanelVis = false;
         }
         private void AddDayType()
-        {
-       
+        {       
             _dtlogic.Add(TheDayType);
             RefreshCollection();
         }
@@ -158,8 +147,7 @@ namespace SalaryArea_Forms.ViewModel
             RefreshCollection();
         }
         private void DeleteDaytype()
-        {
-            
+        {            
             _dtlogic.Delete(TheDayType);
             RefreshCollection();           
         }
@@ -171,11 +159,8 @@ namespace SalaryArea_Forms.ViewModel
 
         private void SetAddingProperties()
         {
-            //TheDayType = null;
             DayTypeStackPanelVis = true;
-            UpdateDayTypeVis = false;
-
-
+            UpdateDayTypeVis = false;            
         }
         private void SetUpdateProperties()
         {
@@ -189,8 +174,5 @@ namespace SalaryArea_Forms.ViewModel
                 MessageBox.Show("Для того щоб оновити потрібно вибрати елемент", "Помилка");
             }
         }
-
-
-
     }
 }

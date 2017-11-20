@@ -8,8 +8,7 @@ using System.Windows;
 namespace SalaryArea_Forms.Logic
 {
     public class PositionLogic
-    {
-     
+    {   
 
         SalDbContext _dbContext = null;
         public PositionLogic()

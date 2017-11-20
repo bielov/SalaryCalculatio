@@ -148,7 +148,6 @@ namespace SalaryArea_Forms.ViewModel
         }
         private void Add()
         {
-            // MessageBox.Show("Add tax", "Помилка");
             _taxlogic.Addt(TheTax);
             RefreshCollection();
         }
@@ -161,8 +160,7 @@ namespace SalaryArea_Forms.ViewModel
         private void DeleteTax()
         {
             _taxlogic.Delete(TheTax);
-            RefreshCollection();
-           
+            RefreshCollection();           
         }
 
         private void RefreshCollection()
@@ -173,7 +171,6 @@ namespace SalaryArea_Forms.ViewModel
         private void SetAddingProperties()
         {
             TheTax = new Tax();
-            //TheTax = null;
             TaxStackPanelVis = true;
             UpdateTaxVis = false;
            
@@ -191,7 +188,5 @@ namespace SalaryArea_Forms.ViewModel
                 MessageBox.Show("Для того щоб оновити потрібно вибрати податок", "Помилка");
             }
         }
-
-
     }
 }

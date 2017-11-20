@@ -13,7 +13,6 @@ namespace SalaryArea_Forms.Logic
         public EmployeeLogic()
         {
             _dbContext = new SalDbContext();
-         //   Employeelist = new ObservableCollection<Employee>();
         }
         internal IEnumerable<Employee> Get()
         {

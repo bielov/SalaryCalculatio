@@ -11,8 +11,6 @@ namespace SalaryArea_Forms.Logic
     {
         SalDbContext _dbContext = null;
 
-        //public IEnumerable<Person> PersonList { get; private set; }
-
         public PersonLogic()
         {
             _dbContext = new SalDbContext();

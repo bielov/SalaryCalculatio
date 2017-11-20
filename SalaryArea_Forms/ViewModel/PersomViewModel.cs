@@ -195,17 +195,10 @@ namespace SalaryArea_Forms.ViewModel
       
         private void AddPerson()
         {
-            //if (ThePerson.gender.ToString() == "Male")
-            //    ThePerson.gender = Gender.Male;
-            //else { 
-            //    ThePerson.gender = Gender.Female; }
             ThePerson.gender = SelectedGender;
             _perlog.Add(ThePerson);
             RefreshCollection();
             ClearProperties();
         }
-   
-        
-       
     }
 }

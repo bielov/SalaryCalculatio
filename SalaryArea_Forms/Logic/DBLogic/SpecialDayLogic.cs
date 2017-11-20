@@ -106,8 +106,7 @@ namespace SalaryArea_Forms.Logic
                     }
                     else
                     {
-                        MessageBox.Show( MessageError.ToString(),"Mistake {0}");
-                       
+                        MessageBox.Show( MessageError.ToString(),"Mistake {0}");                       
                         return false;
                     }
                 }
