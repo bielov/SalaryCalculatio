@@ -17,7 +17,6 @@ namespace SalaryArea_Forms.ViewModel
             SalaryCalculationVisible = false;
 
         }
-        //EmoloyeeViewVisible SalaryCalculationVisible
         private bool _emoloyeeViewVisible;
         public bool EmoloyeeViewVisible
         {
@@ -80,16 +79,14 @@ namespace SalaryArea_Forms.ViewModel
                 return new RelayCommand(OpenSalList, true);
             }
         }
-        // GeneralEmployeeView ShowSalaryCalculation
+      
         public RelayCommand OpenGeneralEmployeeView
         {
             get
             {
                 return new RelayCommand(OpenGenEmployee, true);
             }
-        }
-        // OpenGeneralinformationView
-
+        }   
         public RelayCommand OpenGeneralInformationView
         {
             get
@@ -109,10 +106,8 @@ namespace SalaryArea_Forms.ViewModel
         {
             InformationViewVisible = false;
             SalaryCalculationVisible = false;
-            EmoloyeeViewVisible = true;
-          
+            EmoloyeeViewVisible = true;          
         }
-
 
         private void OpenSalList()
         {
