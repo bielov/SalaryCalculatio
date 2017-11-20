@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="SalaryArea3._2.Model.TimePeriod">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAACAAAAAAAAAAAAAAIAACAAACA=</HashCode>
+      <FileName>Model\TimePeriod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea3._2.Model.Tax">
+    <Position X="4.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAACAA=</HashCode>
+      <FileName>Model\Tax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea3._2.Model.SpecialDay">
+    <Position X="2.25" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAgAAAAAMABACAAAAAAAAAAEAA=</HashCode>
+      <FileName>Model\SpecialDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea3._2.Model.SalaryCalculation">
+    <Position X="10.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CQogAgAYAEAAAAAAAAgJAEABBAAAAKAQAAiAAABAAAA=</HashCode>
+      <FileName>Model\SalaryCalculation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea3._2.Model.Position">
+    <Position X="6.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Model\Position.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea3._2.Model.Person">
+    <Position X="8" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="SalaryArea3._2.Model.Person.Gender">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\Person.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QAAABEAAAAAAAAAAAAAIgAAABAIIAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea3._2.Model.LivingWageMin">
+    <Position X="2.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAQAAAAAAAGAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\LivingWageMin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea3._2.Model.Employee">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAACAAAAAAAAAAAAACIAAgAAAAAAAAgAAAAECAAAA=</HashCode>
+      <FileName>Model\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea3._2.Model.DayType">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAEAA=</HashCode>
+      <FileName>Model\DayType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea3._2.Model.Company">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAIAAAAIAAAAAAACAQAAIAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Model\Company.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

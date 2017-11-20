@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SalaryArea_Forms.ViewModel.DayTypeViewModel">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABYAAQABTACBIAAABSkAIAEAAAEAAEAADEAAAAAAAIA=</HashCode>
+      <FileName>ViewModel\DayTypeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea_Forms.ViewModel.ViewModelBase">
+    <Position X="4.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SalaryArea_Forms.ViewModel.EmployeeViewModel">
+    <Position X="2" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABYAAUAEwDIAAQQAAIAAAREAEBGCICAIBCAACCAAQCg=</HashCode>
+      <FileName>ViewModel\EmployeeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea_Forms.ViewModel.PersomViewModel">
+    <Position X="3.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABaAAQAAQACAAAAACMAEIBFAAAEAACEADAEAICgAAGA=</HashCode>
+      <FileName>ViewModel\PersomViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea_Forms.ViewModel.PositionViewModel">
+    <Position X="5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCIAAAAAAAAiQAAAgBIgEAAAACAAEACAUAKAIAQAk=</HashCode>
+      <FileName>ViewModel\PositionViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea_Forms.ViewModel.SpecialDayViewModel">
+    <Position X="6.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAYAIQABQAKAIAEAAQAAIAEAAEAAIEAYXBAAAiYAgAA=</HashCode>
+      <FileName>ViewModel\SpecialDayViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea_Forms.ViewModel.TaxViewModel">
+    <Position X="8" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwYAAQAARgKAAAEAAQAAIAEAQAEAIAAATAAACIAAiAA=</HashCode>
+      <FileName>ViewModel\TaxViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea_Forms.ViewModel.WageMinimumViewModel">
+    <Position X="9.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgYAgQAASAKAAACAAIAAIgEEEAEAEAAATAAAACAAAFg=</HashCode>
+      <FileName>ViewModel\WageMinimumViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SalaryArea_Forms.ViewModel.SalaryCalculationViewModel">
+    <Position X="11.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBAhIcCAwAIAARBAAIKAQIIAFRIACGABAKABQCABEAQ=</HashCode>
+      <FileName>ViewModel\SalaryCalculationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

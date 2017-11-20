@@ -1,0 +1,303 @@
+﻿<UserControl x:Class="SalaryArea_Forms.View.SalaryCalculationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalaryArea_Forms.View"
+        xmlns:conv="clr-namespace:SalaryArea_Forms.Converters"
+        mc:Ignorable="d"
+        Height="700" Width="1300">
+    <UserControl.Resources>
+        <Style TargetType="TextBox" x:Key="TextBoxStyle" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="0 2 5 0" />
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="5 3 5 0" />
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        <Style TargetType="Button" x:Key="ButtonStyle" >
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="5 5 5 5" />
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+            <conv:StakPanelToVisible x:Key="StakPanelToVisible" />
+            <conv:PersonToAbreviation x:Key="PersonToAbreviation" />
+        </Grid.Resources>
+        <StackPanel>
+            <TextBlock Text="Виберіть місяць"
+                   Style="{StaticResource TextBlockStyle}"/>
+            <ComboBox  Margin="1 2 5 2"
+                      ItemsSource="{Binding Path=PeriodCollection}"
+                      SelectedItem="{Binding Path=ThePeriod, Mode=TwoWay}"
+                      DisplayMemberPath ="PeriodName"
+                      IsEditable="True" 
+                      StaysOpenOnEdit="True" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Center"
+                      x:Name="PeriodCombobox"
+                      Padding="2"                      
+                      >
+            </ComboBox>
+            <TextBlock Text="Виберіть рік" 
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Style="{StaticResource TextBoxStyle}"                     
+                    Text="{Binding  Path=NavigationYear}"/>
+            <Button Content="Далі" 
+                    Style="{StaticResource ButtonStyle}"  
+                    Command="{Binding SetEdittingButton}"/>
+            <StackPanel  Visibility="{Binding DataGridStackPanelVis, Converter={StaticResource StakPanelToVisible}}">
+
+                <TextBlock HorizontalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat=" Введінь дані для розрахунку по {0} {1}">
+                            <Binding Path="ThePeriod.PeriodName"></Binding>
+                            <Binding Path=" NavigationYear"></Binding>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DataGrid Grid.Column="0" Grid.RowSpan="10"
+            AutoGenerateColumns="False"
+            x:Name="UserEnterCalculationGrid"  
+             ItemsSource="{Binding Path= SalaryCalculationCollection}"       
+             SelectedItem="{Binding TheSalaryCalculation, Mode=TwoWay,
+                IsAsync=True}"                     
+                CanUserAddRows="False"
+                     SelectionMode="Single"
+                CanUserDeleteRows="False"
+                 CanUserReorderColumns="False"
+                CanUserSortColumns="True"
+                 IsReadOnly="True"
+                 AlternatingRowBackground="Gainsboro" 
+                FrozenColumnCount="2"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.VerticalScrollBarVisibility="Visible" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ПІБ">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding Converter="{StaticResource PersonToAbreviation}" Mode="TwoWay" >
+                                        <Binding Path="employee.person.Surname"/>
+                                        <Binding Path="employee.person.FirstName" />
+                                        <Binding Path="employee.person.MidleName"/>
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Індетифікаційний код"
+                                Binding="{Binding Path=employee.person.IndentificalCode}" />
+                            <DataGridTextColumn Header="Дата прийняття"
+                                Binding="{Binding Path=employee.StartDate, StringFormat={}{0:dd.MM.yy}}" />
+                            <DataGridTextColumn Header="Відпрацьовані дні" 
+                            Binding="{Binding Path=RealWorkTime, Mode=TwoWay}" />
+
+                            <DataGridTextColumn Header="Відпускні"
+                   Binding="{Binding Path=VacationAccure, Mode=TwoWay}" />
+                            <DataGridTextColumn Header="Місяць" 
+                   Binding="{Binding Path=IllnessMonth, Mode=TwoWay}" />
+                            <DataGridTextColumn Header="дні" 
+                   Binding="{Binding Path=IllnessDay, Mode=TwoWay}" />
+                            <DataGridTextColumn Header="Сума " 
+                   Binding="{Binding Path=IllnessSum, Mode=TwoWay}" />
+                            <DataGridTextColumn Header="Індексація" 
+                   Binding="{Binding Path=Indexation, Mode=TwoWay}" />
+                            <DataGridTextColumn Header="Аванс" 
+                   Binding="{Binding Path=Advance, Mode=TwoWay}" />
+                            <DataGridTextColumn Header="Інші утримання" 
+                   Binding="{Binding Path=AnotherDeduct, Mode=TwoWay}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Grid.Column="1"
+                               Grid.ColumnSpan="2" Grid.Row="0"
+                                Style="{StaticResource TextBlockStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat=" {0} {1} {2}" Mode="TwoWay" >
+                                <Binding Path="TheSalaryCalculation.employee.person.Surname"/>
+                                <Binding Path="TheSalaryCalculation.employee.person.FirstName" />
+                                <Binding Path="TheSalaryCalculation.employee.person.MidleName"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1"
+                       Text="Відпрацьовані дні" 
+                       Style="{StaticResource TextBlockStyle}"/>
+                    <TextBox Grid.Column="2" Grid.Row="1"                    
+                     Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding TheSalaryCalculation. RealWorkTime, Mode=TwoWay}"
+                    />
+                    <TextBlock Grid.Column="1" Grid.Row="2"
+                       Text="Відпускні" 
+                       Style="{StaticResource TextBlockStyle}"/>
+                    <TextBox Grid.Column="2" Grid.Row="2" 
+                  
+                     Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding TheSalaryCalculation.VacationAccure, Mode=TwoWay}"
+                    />
+                    <TextBlock Grid.Column="1" Grid.Row="3"
+                       Text="Лікарняні місяці" 
+                       Style="{StaticResource TextBlockStyle}"/>
+                    <TextBox Grid.Column="2" Grid.Row="3" 
+                   
+                     Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding TheSalaryCalculation. IllnessMonth, Mode=TwoWay}"
+                    />
+                    <TextBlock Grid.Column="1" Grid.Row="4"
+                       Text="Лікарняні дні" 
+                       Style="{StaticResource TextBlockStyle}"/>
+                    <TextBox Grid.Column="2" Grid.Row="4"                   
+                     Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding TheSalaryCalculation.IllnessDay, Mode=TwoWay}"
+                    />
+                    <TextBlock Grid.Column="1" Grid.Row="5"
+                       Text="Лікарняні Сума" 
+                       Style="{StaticResource TextBlockStyle}"/>
+                    <TextBox Grid.Column="2" Grid.Row="5"                   
+                     Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding TheSalaryCalculation.IllnessSum, Mode=TwoWay}"
+                    />
+                    <TextBlock Grid.Column="1" Grid.Row="6"
+                       Text="Індексація" 
+                       Style="{StaticResource TextBlockStyle}"/>
+                    <TextBox Grid.Column="2" Grid.Row="6" 
+                     Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding TheSalaryCalculation.Indexation, Mode=TwoWay}"
+                    />
+                    <TextBlock Grid.Column="1" Grid.Row="7"
+                       Text="Аванс" 
+                       Style="{StaticResource TextBlockStyle}"/>
+                    <TextBox Grid.Column="2" Grid.Row="7"                 
+                     Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding TheSalaryCalculation.Advance, Mode=TwoWay}"
+                    />
+                    <TextBlock Grid.Column="1" Grid.Row="8"
+                       Text="Інші утримання" 
+                       Style="{StaticResource TextBlockStyle}"/>
+                    <TextBox Grid.Column="2" Grid.Row="8"                   
+                     Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding TheSalaryCalculation.AnotherDeduct, Mode=TwoWay}"
+                    />
+                    <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Відмінити"
+                    Grid.Column="0" Style="{StaticResource ButtonStyle}"             
+                     Command="{Binding Cancel}" />
+                        <Button  Content="Зберегти"
+                    Grid.Column="1" Style="{StaticResource ButtonStyle}"
+                    Command="{Binding Save}" />
+
+                    </Grid>
+                </Grid>
+                <Button Content="Далі" Margin="5 5 5 5" Padding="2"                  
+                   Command="{ Binding SetCalculationProperties }"
+                    CommandParameter="{Binding ElementName=UserEnterCalculationGrid, Path=SelectedItem}"
+                    />
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding ResultDataGridStackPanelVis, Converter={StaticResource StakPanelToVisible}}" >
+
+                <DataGrid 
+            AutoGenerateColumns="False"
+            x:Name="FinalCalculationGrid"  
+             ItemsSource="{Binding Path= SalaryCalculationCollection}"       
+             SelectedItem="{Binding TheSalaryCalculation, Mode=TwoWay,
+                IsAsync=True}"                     
+                CanUserAddRows="False"
+                     SelectionMode="Single"
+                CanUserDeleteRows="False"
+                 CanUserReorderColumns="False"
+                CanUserSortColumns="True"
+                 IsReadOnly="True"
+                 AlternatingRowBackground="Gainsboro" 
+                FrozenColumnCount="2"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ПІБ" Width="90">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding Converter="{StaticResource PersonToAbreviation}" Mode="TwoWay" >
+                                    <Binding Path="employee.person.Surname"/>
+                                    <Binding Path="employee.person.FirstName" />
+                                    <Binding Path="employee.person.MidleName"/>
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Індетифікаційний код" Width="100"
+                                Binding="{Binding Path=employee.person.IndentificalCode}" />
+                        <DataGridTextColumn Header="Дата прийняття" Width="60"
+                                Binding="{Binding Path=employee.StartDate, StringFormat={}{0:dd.MM.yy}}" />
+                        <DataGridTextColumn Header="Відпрацьовані дні" Width="60"
+                            Binding="{Binding Path=RealWorkTime, Mode=TwoWay}" />
+
+                        <DataGridTextColumn Header="Звробітня плата(основна)"
+                                            Width="80"
+                   Binding="{Binding Path=BasicSalary, Mode=TwoWay}" />
+
+                        <DataGridTextColumn Header="Відпускні" Width="80"
+                   Binding="{Binding Path=VacationAccure, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Місяць" Width="50"
+                   Binding="{Binding Path=IllnessMonth, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="дні"  Width="30"
+                   Binding="{Binding Path=IllnessDay, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Сума "  Width="60"
+                   Binding="{Binding Path=IllnessSum, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Індексація"  Width="60" 
+                   Binding="{Binding Path=Indexation, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Всього"  Width="80"
+                   Binding="{Binding Path=SumAccure, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="ЄСВ"   Width="50"
+                   Binding="{Binding Path=ESV, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="ПСП"   Width="70"
+                   Binding="{Binding Path=PSP, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="в/збір" Width="50"
+                   Binding="{Binding Path=DeductMilitaryTex, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="ПДФО" Width="50"
+                   Binding="{Binding Path=DeductPDFO, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Всього утриманно" 
+                                            Width="70"
+                   Binding="{Binding Path=DeductSum, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Аванс" Width="60"
+                   Binding="{Binding Path=Advance, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Інші утримання"  Width="60"
+                   Binding="{Binding Path=AnotherDeduct, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Сума до сплати" Width="60"
+                   Binding="{Binding Path=FinalSalary, Mode=TwoWay}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--<Button Content="Підготовка на друк" 
+                        Style="{StaticResource ButtonStyle}"
+                    Command="{Binding PrepareToPrint}"/>-->
+
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

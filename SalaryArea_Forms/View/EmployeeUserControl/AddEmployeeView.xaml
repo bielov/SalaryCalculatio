@@ -1,0 +1,207 @@
+﻿<UserControl x:Class="SalaryArea_Forms.View.AddEmployeeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalaryArea_Forms.View"
+        xmlns:vm="clr-namespace:SalaryArea_Forms.ViewModel"
+        xmlns:conv="clr-namespace:SalaryArea_Forms.Converters"
+        mc:Ignorable="d"
+         
+             >
+    <UserControl.Resources>
+   
+        <!--<DataTemplate DataType="{x:Type vm:EmployeeViewModel}"/>-->
+        
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle" >
+            <Setter Property="FontSize" Value="14"/>           
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="5 3 5 0" />
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        <Style TargetType="DatePicker" x:Key="DataPickerStyle">
+            <Setter Property="Margin" Value="5 5 5 5" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="IsTodayHighlighted" Value="True"/>            
+        </Style>
+       
+    </UserControl.Resources>
+    
+     <Grid  Margin="0 0 0 5"> 
+        <Grid.Resources>
+            <conv:StakPanelToVisible x:Key="StakPanelToVisible" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="4*"/>
+        <ColumnDefinition Width="3*"/>
+        <ColumnDefinition Width="4*"/>
+     </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <ListBox ItemsSource="{Binding PersonCollection}"
+                 SelectedItem="{Binding ThePerson, Mode=TwoWay}"
+                 SelectionMode="Single" Margin="5 5 5 0" 
+                 Padding="2"                 
+                 VerticalAlignment="Stretch"
+                 HorizontalAlignment="Stretch"  
+                 x:Name="PersonListBox"        
+                         
+                 >
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel >
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat=" {0} {1} {2}">
+                                            <Binding Path="Surname"/>
+                                            <Binding Path="FirstName"/>
+                                            <Binding Path="MidleName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock Text="{Binding IndentificalCode}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Content="Добавити"
+                        Margin="0 0 5 0"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Command="{Binding SetAddingTableButton}"
+                    CommandParameter="{Binding ElementName=PersonListBox,Path=SelectedItem}" />
+         
+
+        </StackPanel >
+
+            <StackPanel Grid.Column="1" Margin="5 2 5 5" 
+                    Visibility="{Binding TableaddStackPanelVis, Converter={StaticResource StakPanelToVisible}}">
+                <TextBlock Text="ПІБ :" 
+                       Style="{StaticResource TextBlockStyle}"
+                      />
+                <TextBlock Margin="5 5 5 5" Padding="2" 
+                       Style="{StaticResource TextBlockStyle}"
+                       Text="{Binding SelectedSurnameText}"
+                       />
+                <TextBlock Text="Виберіть професію" 
+                       Style="{StaticResource TextBlockStyle}"/>
+                <ComboBox  ItemsSource="{Binding Path= PositionCollection}"
+                       SelectedItem="{Binding Path=ThePosition}" 
+                       DisplayMemberPath ="PositionName" 
+                       IsEditable="True" 
+                       StaysOpenOnEdit="True" 
+                       HorizontalAlignment="Stretch" 
+                       VerticalAlignment="Center"
+                       Margin="5 5 5 5"
+                       Padding="2"
+                       />
+                
+            <TextBlock Text="Оклад"
+                       Style="{StaticResource TextBlockStyle}"
+                           />
+            <TextBox Text="{Binding TheEmployee.Salary, Mode=TwoWay}"
+                     Margin="5 5 5 5 "
+                     Padding="3"/>
+
+            <TextBlock Text="Дата прийняття"
+                       Style="{StaticResource TextBlockStyle}"
+                           />
+                <DatePicker  Style="{StaticResource DataPickerStyle}" 
+                                Text="{Binding TheEmployee.StartDate, Mode=TwoWay}"/>
+                <TextBlock Text="Дата звільнення"
+                       Style="{StaticResource TextBlockStyle}"/>
+                <DatePicker Style="{StaticResource DataPickerStyle}" 
+                            Text="{Binding TheEmployee.EndDate, Mode=TwoWay}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+           
+            <Button Content="Зберегти табель"
+                    Margin="5 5 5 5" Grid.Row="0"
+                    HorizontalAlignment="Stretch"
+                       Command="{Binding  Add}"/>
+            <Button Content="Оновити табель"
+                    Margin="5 5 5 5" Grid.Row="0"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding  Update}"
+                    Visibility="{Binding UpdateEmployeeVis, Converter={StaticResource StakPanelToVisible}}"/>
+                <Button Content="Відмінити"
+                    Margin="5 5 5 5" Grid.Row="1"
+                    HorizontalAlignment="Stretch"                       
+                    Command="{Binding  Cancel}"
+                    />
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <ListBox ItemsSource="{Binding EmployeeCollection}"
+                 SelectedItem="{Binding TheEmployee, Mode=TwoWay}"
+                 SelectionMode="Single" Margin="5 5 5 0" 
+                 Padding="2"                 
+                 VerticalAlignment="Stretch"
+                 HorizontalAlignment="Stretch"  
+                 x:Name="EmployeeListBox"        
+                         
+                 >
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel >
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat=" {0} {1} {2}">
+                                        <Binding Path="person.Surname"/>
+                                        <Binding Path="person.FirstName" />
+                                        <Binding Path="person.MidleName"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="Посада-  {0} Оклад - {1}">
+                                        <Binding Path="position.PositionName"/>
+                                        <Binding Path="Salary"/>                                    
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat=" {0:dd.MM.yy} - {0:dd.MM.yy}">
+                                        <Binding Path="StartDate"/>
+                                        <Binding Path="EndDate"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                       
+            <Button Content="Оновити" Grid.Column="0"
+                    Margin="0 0 5 0" Grid.Row="0"                     
+                    Command="{Binding SetUpdateTableButton}"
+                    CommandParameter="{Binding ElementName=EmployeeListBox,Path=SelectedItem}" />
+            <Button Content="Видалити" Grid.Column="1"
+                    Margin="0 0 5 0" Grid.Row="0"                    
+                    Command="{Binding Delete}"
+                    CommandParameter="{Binding ElementName=EmployeeListBox,Path=SelectedItem}" />
+            </Grid>
+
+
+        </StackPanel >
+
+
+    </Grid>
+</UserControl>
+
+    

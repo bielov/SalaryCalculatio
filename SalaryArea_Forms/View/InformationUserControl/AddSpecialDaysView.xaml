@@ -1,0 +1,184 @@
+﻿<UserControl x:Class="SalaryArea_Forms.View.InformationUserControl.AddSpecialDaysView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalaryArea_Forms.View.InformationUserControl"
+        xmlns:conv="clr-namespace:SalaryArea_Forms.Converters"
+        mc:Ignorable="d"
+     >
+    <UserControl.Resources>
+
+        <Style TargetType="TextBox" x:Key="TextBoxStyle" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="0 2 5 0" />
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="5 3 5 0" />
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        <Style TargetType="Button" x:Key="ButtonStyle" >
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="5 5 5 5" />
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        <conv:StakPanelToVisible x:Key="StakPanelToVisible" />
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="Внесення календарних, робочих та неробочих святкових днів" 
+            HorizontalAlignment="Stretch"
+            Margin="5 2 5 0"
+            TextWrapping="Wrap"
+            FontWeight="Bold" FontSize="16"
+            />
+        <Grid Margin="0 0 0 5">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Visibility="{Binding SDStackPanelVis, Converter={StaticResource StakPanelToVisible}}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Виберіть тип днів" Grid.Column="0" Grid.Row="0"
+                            Style="{StaticResource TextBlockStyle}"/>
+                <ComboBox Grid.Column="0" Grid.ColumnSpan="2"
+                      Grid.Row="1" Margin="1 2 5 0"
+                      ItemsSource="{Binding Path=DayTypeCollection}"
+                      SelectedItem="{Binding Path=TheDayType, Mode=TwoWay}"
+                      DisplayMemberPath ="NameDayType"
+                      IsEditable="True" 
+                      StaysOpenOnEdit="True" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Center"
+                      x:Name="DayztypeCombobox"
+                      Padding="2"                      
+                      >
+
+                </ComboBox>
+
+                <TextBlock Style="{StaticResource TextBlockStyle}"
+                   Grid.Column="1" Grid.Row="2"
+                   Text="Рік"/>
+                <TextBox Style="{StaticResource TextBoxStyle}"
+                 Grid.Column="1" Grid.Row="2" 
+                    Text="{Binding  TheSpecialDay.SpecialDayYear, Mode=TwoWay}"/>
+                <TextBlock Style="{StaticResource TextBlockStyle}"
+                   Grid.Column="0" Grid.Row="2"
+                   Text="Рік"/>
+                <TextBlock Style="{StaticResource TextBlockStyle}"
+                   Grid.Column="0" Grid.Row="3"
+                   Text="Місяць"/>
+                <ComboBox Grid.Column="1" 
+                      Grid.Row="3" Margin="1 2 5 2"
+                      ItemsSource="{Binding Path=PeriodCollection}"
+                      SelectedItem="{Binding Path=TheMonth, Mode=TwoWay}"
+                      DisplayMemberPath ="PeriodName"
+                      IsEditable="True" 
+                      StaysOpenOnEdit="True" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Center"
+                      x:Name="PeriodCombobox"
+                      Padding="2"                      
+                      >
+
+                </ComboBox>
+                <TextBlock Style="{StaticResource TextBlockStyle}"
+                   Grid.Column="0" Grid.Row="4"
+                   Text="Кількість днів" Height="21" Margin="5,0" VerticalAlignment="Bottom"/>
+                <TextBox Style="{StaticResource TextBoxStyle}"
+                 Grid.Column="1" Grid.Row="4" 
+                    Text="{Binding TheSpecialDay.DayValue, Mode=TwoWay}"/>
+
+
+                <Button Content="Відмінити" Grid.Row="5"
+                    Margin="5 5 5 0 " Grid.Column="0"
+                    Command="{Binding Cancel}"/>
+                <Button Content="Зберегти"  Grid.Row="5"
+                    Margin="5 5 5 0 " Grid.Column="1"
+                    Command="{Binding Add}"/>
+                <Button Content="Оновити"
+                    Margin="5 5 5 0 " Grid.Column="1"
+                    Command="{Binding Update}"  Grid.Row="5"
+                    CommandParameter="{Binding ElementName=DayztypeCombobox,Path=SelectedItem}" 
+                    Visibility="{Binding UpdateSDVis, Converter={StaticResource StakPanelToVisible}}"/>
+            </Grid>
+
+            <StackPanel Grid.Column="1">
+             
+                <Grid>
+                    <ListBox
+                ItemsSource="{Binding Path=SpecialDayCollection, UpdateSourceTrigger=PropertyChanged}"
+                 SelectedItem="{Binding Path=TheSpecialDay, Mode=TwoWay}"
+                 SelectionMode="Single" Margin="5 5 5 0" 
+                 Padding="2"                 
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Stretch"  
+                 
+                 x:Name="SpecialDayListBox" 
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.CanContentScroll="True"                   
+                 >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" >
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat=" {0}- {1} - {2} - {3}">
+                                                <Binding Path="daytype.NameDayType"/>
+                                                <Binding Path="SpecialDayYear"/>
+                                                <Binding Path="timeperiod.PeriodName"/>
+                                                <Binding Path="DayValue"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+                
+                <Grid VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <!--<ColumnDefinition Width="*"/>-->
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Добавити"
+                        Grid.Column="0"
+                    VerticalAlignment="Bottom"
+                    Margin="2 0 5 0"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding SetAddingTableButton}"
+                  />
+                        <Button Content="Оновити"
+                        Grid.Column="1"
+                    Margin="2 0 5 0"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding SetUpdateTableButton}"
+                    CommandParameter="{Binding ElementName=SpecialDayGrid,Path=SelectedItem}" />
+                    </Grid>               
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>

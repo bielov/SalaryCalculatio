@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="SalaryArea_Forms.View.EmployeesListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalaryArea_Forms.View"
+        xmlns:vm="clr-namespace:SalaryArea_Forms.ViewModel"
+        xmlns:conv="clr-namespace:SalaryArea_Forms.Converters"
+        mc:Ignorable="d"
+      >
+
+    <Grid >
+        <StackPanel>
+            <Grid Margin="0 5 0 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+           
+            <TextBlock Text="Список працівників на фірмі" 
+                       FontSize="14" HorizontalAlignment="Center"
+                       Grid.Column="0" />
+                <Button Content="Оновити" Grid.Column="1"
+                       Margin="0 0 15 0" 
+                    Command="{Binding RefresehDataGridCollection}" />
+            </Grid>
+            <DataGrid 
+            AutoGenerateColumns="False"
+            x:Name="EmployeesGrid"    
+                ItemsSource="{Binding Path= EmployeeCollection}"                  
+                  SelectedItem="{Binding TheEmployee, Mode=TwoWay,
+                IsAsync=True}"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                IsReadOnly="True"
+                CanUserReorderColumns="False"
+                CanUserSortColumns="True"
+                 AlternatingRowBackground="LightYellow" 
+                FrozenColumnCount="2"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+            >
+            <DataGrid.Columns>
+
+                    <DataGridTextColumn Binding="{Binding person.Surname}" 
+                                    Header="Прізвище"/>
+                    <DataGridTextColumn Binding="{Binding person.FirstName}" 
+                                    Header=" Ім'я "/>
+                    <DataGridTextColumn Binding="{Binding person.MidleName}" 
+                                    Header="По-Батькові"/>
+                    <DataGridTextColumn Binding="{Binding person.BirthDay, StringFormat={}{0:dd.MM.yy}}"
+                                    Header="Дата Народження" />
+                    <DataGridTextColumn Binding="{Binding person.IndentificalCode}" 
+                                    Header="Індефікаційний код"/>
+                    <DataGridTextColumn Binding="{Binding person.PasportCode}" 
+                                    Header="Код паспору"/>
+                    <DataGridTextColumn Binding="{Binding position.PositionName}" 
+                                    Header="Посада"/>
+                    <DataGridTextColumn Binding="{Binding Salary}" 
+                                    Header="Оклад"/>
+                    <DataGridTextColumn Binding="{Binding StartDate, StringFormat={}{0:dd.MM.yy}}" 
+                                    Header="Дата прийнятя"/>
+                    <DataGridTextColumn Binding="{Binding EndDate, StringFormat={}{0:dd.MM.yy}}" 
+                                    Header="Дата звільнення"/>
+                  
+            </DataGrid.Columns>
+            
+        </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>

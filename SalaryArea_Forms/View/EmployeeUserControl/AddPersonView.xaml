@@ -1,0 +1,212 @@
+﻿<UserControl x:Class="SalaryArea_Forms.View.AddPersonView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalaryArea_Forms"
+        xmlns:v="clr-namespace:SalaryArea_Forms.View"
+        xmlns:vm="clr-namespace:SalaryArea_Forms.ViewModel"
+        xmlns:conv="clr-namespace:SalaryArea_Forms.Converters"
+        mc:Ignorable="d"
+        Height="Auto" Width="Auto" 
+        MinHeight="300" MinWidth="600">
+    
+    <UserControl.Resources>       
+        <Style TargetType="TextBox" x:Key="TextBoxStyle" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="0 2 5 0" />
+            <Setter Property="Padding" Value="2"/>
+        </Style>        
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle" >
+            <Setter Property="FontSize" Value="12"/>           
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="5 3 5 0" />
+            <Setter Property="Padding" Value="2"/>
+        </Style>                 
+       
+    </UserControl.Resources>
+    <Grid Margin="5 5 5 5">
+        <Grid.Resources>
+            <conv:StakPanelToVisible x:Key="StakPanelToVisible" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>          
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+           
+    <!--#region View for CRUD operation with Person -->
+        <StackPanel Grid.Column="1"
+                    Visibility="{Binding PersonStackPanelVis, Converter={StaticResource StakPanelToVisible}}">
+            <Label Content="Додати працівник" FontSize="16" 
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               Margin="0 5 0 10"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="5*"/>               
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+               
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" 
+                           Text="Прізвище"
+                           Style="{StaticResource TextBlockStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="1"
+                       Text="Ім'я"
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="2"
+                       Text="По-батькові" 
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="3"
+                       Text="Індефікаційний код"
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="4"
+                           Text="Серія та код паспорту"
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="5" 
+                       Text="Дата народження" 
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="6"
+                       Text="Стать" 
+                       Style="{StaticResource TextBlockStyle}"/>
+           
+            <TextBox Grid.Column="1" Grid.Row="0"
+                     Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding ThePerson.Surname, Mode=TwoWay}"
+                    />
+            <TextBox Grid.Column="1" Grid.Row="1"                     
+                     Style="{StaticResource TextBoxStyle}" 
+                     Text="{Binding ThePerson.FirstName, Mode=TwoWay}"
+                    />
+            <TextBox Grid.Column="1" Grid.Row="2"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding ThePerson.MidleName, Mode=TwoWay}"
+                    />
+            <TextBox Grid.Column="1" Grid.Row="3"                    
+                    Text="{Binding ThePerson.IndentificalCode, Mode=TwoWay}"
+                     Style="{StaticResource TextBoxStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="4"
+                     Style="{StaticResource TextBoxStyle}"
+                     ToolTip="Приклад АТ87452"
+                     Text="{Binding ThePerson.PasportCode, Mode=TwoWay}"
+                   />
+            <DatePicker Grid.Column="1" Grid.Row="5"
+                        Margin="0 2 5 0"
+                        Text="{Binding ThePerson.BirthDay, Mode=TwoWay}"
+                      />
+            <ComboBox Grid.Column="1" Grid.Row="6" 
+                      x:Name="cmb_Gender" Margin="0 2 5 0"                        
+                      ItemsSource="{Binding Genders}" 
+                      SelectedItem="{Binding SelectedGender}"
+                      >                
+            </ComboBox>
+
+            </Grid>
+        <Grid> 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="Cancel_Button" Content="Відмінити"
+                    Grid.Column="1" Grid.Row="0" 
+               Margin=" 0 10 5 0" FontSize="12"
+                     Command="{Binding Cancel}"
+                    
+                    />
+                <Button  Content="Зберегти"
+                    Grid.Column="2" Grid.Row="0" 
+               Margin=" 5 10 5 0" FontSize="12"
+                    Command="{Binding Add}" />
+                <!--Visibility="{Binding PersonStackPanelVis, Converter={StaticResource StakPanelToVisible}}"/>-->
+                <Button Content="Оновити"
+                    Grid.Column="2" Grid.Row="0" 
+               Margin=" 5 10 5 0" FontSize="12"
+                    Command="{Binding Update}"
+                    Visibility="{Binding UpdatePersonVis, Converter={StaticResource StakPanelToVisible}}"/>
+
+            </Grid>      
+    </StackPanel>
+    <!--#endregion-->
+        <StackPanel Grid.Column="0">
+
+            <ListBox ItemsSource="{Binding PersonCollection, UpdateSourceTrigger=PropertyChanged}"
+                 SelectedItem="{Binding ThePerson, Mode=TwoWay}"
+                 SelectionMode="Single" Margin="5 5 5 0" 
+                 Padding="2"                 
+                 VerticalAlignment="Stretch"
+                 HorizontalAlignment="Stretch"  
+                 x:Name="PersonListBox" 
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.CanContentScroll="True"
+                   
+                 >
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel >
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat=" {0} {1} {2} ">
+                                        <Binding Path="Surname"/>
+                                        <Binding Path="FirstName"/>
+                                        <Binding Path="MidleName"/>                                       
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>                            
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat=" {0} {1}">
+                                        <Binding Path="IndentificalCode" />
+                                        <Binding Path="PasportCode"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Добавити" Grid.Column="1"
+                    VerticalAlignment="Bottom"
+                    Margin="0 0 5 0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding SetAddingTableButton}"
+                   />
+                <Button Content="Оновити" Grid.Column="2"
+                    Margin="0 0 5 0"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Command="{Binding SetUpdateTableButton}"
+                    CommandParameter="{Binding ElementName=PersonListBox,Path=SelectedItem}" />
+                <Button Content="Видалити" Grid.Column="3"
+                    VerticalAlignment="Bottom"
+                    Margin="0 0 5 0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding Delete}"
+                    CommandParameter="{Binding ElementName=PersonListBox,Path=SelectedItem}" />
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</UserControl>
+

@@ -1,0 +1,68 @@
+﻿<Window x:Class="SalaryArea_Forms.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalaryArea_Forms"
+        xmlns:view="clr-namespace:SalaryArea_Forms.View"
+        xmlns:conv="clr-namespace:SalaryArea_Forms.Converters"
+     
+        mc:Ignorable="d"
+        Title="Обрахунок зарплати " Height="700" Width="1300">
+  
+    <Grid Background="LightGray">
+        <Grid.Resources>
+            <conv:StakPanelToVisible x:Key="StakPanelToVisible" />
+
+       </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+       
+      <Menu Height="20" VerticalAlignment="Top"  Grid.Row="0">
+            <MenuItem Header="Обрахунки"
+                     >
+                <MenuItem Header="Новий обрахунок" 
+                          Command="{Binding NewSalaryCalculation}"/>
+                <MenuItem Header="Показати обрахунки"
+                          Command="{Binding ShowSalaryCalculation}"/>
+
+            </MenuItem>
+            <MenuItem Header="Співробітники" 
+                      Command="{Binding OpenGeneralEmployeeView}">                
+            </MenuItem>
+            <MenuItem Header="Додатки"
+                        Command="{Binding OpenGeneralInformationView}">
+                
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid  Visibility="{Binding EmoloyeeViewVisible, Converter={StaticResource StakPanelToVisible}}">
+            <StackPanel HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" 
+                                 Background="WhiteSmoke"
+                                >
+                <view:GeneralEmployeeView/>
+            </StackPanel>
+            </Grid>
+            <Grid  Visibility="{Binding InformationViewVisible, Converter={StaticResource StakPanelToVisible}}">
+            <StackPanel HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" 
+                                 Background="WhiteSmoke"
+                                >
+                <view:GeneralInformationView/>
+            </StackPanel>
+            </Grid>
+            <Grid  Visibility="{Binding SalaryCalculationVisible, Converter={StaticResource StakPanelToVisible}}">
+                <StackPanel HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" 
+                                 Background="WhiteSmoke"
+                                >
+                    <view:SalaryCalculationView/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>

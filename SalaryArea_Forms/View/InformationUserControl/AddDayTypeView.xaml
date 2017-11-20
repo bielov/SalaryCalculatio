@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="SalaryArea_Forms.View.InformationUserControl.AddDayTypeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalaryArea_Forms.View.InformationUserControl"
+        xmlns:conv="clr-namespace:SalaryArea_Forms.Converters"
+        mc:Ignorable="d"
+    >
+    <UserControl.Resources>
+        <conv:StakPanelToVisible x:Key="StakPanelToVisible" />
+    </UserControl.Resources>
+    <Grid>  
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        >
+            <TextBlock Text="Тип днів" FontSize="12 "
+                   Margin="5 0 0 0" Padding="2" HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+            <ListBox
+                ItemsSource="{Binding DayTypeCollection, UpdateSourceTrigger=PropertyChanged}"
+                 SelectedItem="{Binding TheDayType, Mode=TwoWay}"
+                 SelectionMode="Single" Margin="5 5 5 0" 
+                 Padding="2"                 
+                 VerticalAlignment="Stretch"
+                 HorizontalAlignment="Stretch"  
+                 x:Name="DayTypeListBox" 
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.CanContentScroll="True"                   
+                 >
+
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel >
+                            <TextBlock Text="{Binding NameDayType}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+        </StackPanel>
+
+        <StackPanel  Margin="5 10 5 0" Grid.Column="1" >
+            <StackPanel   Visibility="{Binding DayTypeStackPanelVis, Converter={StaticResource StakPanelToVisible}}">
+                <TextBlock Text="Добавити класифікацію" />
+                <TextBox Margin="5 5 5 5" 
+                     Padding="2" 
+                     Text="{Binding TheDayType.NameDayType, Mode=TwoWay}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                <Button Content="Добавити" Grid.Column="1"                            
+                            Margin=" 5 0 5 0" 
+                            Command="{ Binding Add}" />
+                    <Button Content="Оновити" Grid.Column="1"                            
+                            Margin=" 5 0 5 0" 
+                            Command="{ Binding Update}" 
+                            Visibility="{Binding  UpdateDayTypeVis, Converter={StaticResource StakPanelToVisible}}"/>
+                    <Button Content="Скасувати" Margin="5 0 5 0"
+                        Padding="2" Grid.Column="0"
+                   Command="{ Binding  Cancel}"/>
+                </Grid>
+            </StackPanel>
+       
+            <Button Content="Добавити " Margin="5 5 5 1" 
+                    Padding="2" 
+                     Command="{Binding SetAddingTableButton}" />
+            <Button Content="Оновити" Margin="5 5 5 1" 
+                    Padding="2" 
+                     Command="{Binding SetUpdateTableButton}" 
+                     CommandParameter="{Binding ElementName=DayTypeListBox, Path=SelectedItem}" />
+            <!--<Button Content="Видалити" Margin="5 5 5 5" Padding="2"
+                    Command="{ Binding  Delete}"
+                     CommandParameter="{Binding ElementName=DayTypeListBox,Path=SelectedItem}" />-->
+        </StackPanel>
+
+    </Grid>
+
+</UserControl>
